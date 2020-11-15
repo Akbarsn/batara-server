@@ -71,11 +71,41 @@ const CourseRoute = (app) => {
         courseHandler.PostExam,
     );
 };
+
+const UserRoute = (app) => {
+    const userHandler = require('../handler/user');
+    const { CheckToken } = require('../middleware/auth');
+
+    app.get('/user/', CheckToken, userHandler.GetProfile);
+
+    app.get(
+        '/user/ongoing',
+        CheckToken,
+        userHandler.GetOngoingCourse,
+    );
+
+    app.get(
+        '/user/completed',
+        CheckToken,
+        userHandler.GetCompletedCourse,
+    );
+
+    app.get('/user/courses', CheckToken, userHandler.GetAllCourse);
+};
 module.exports = {
     InitRoute: (app) => {
+        const {
+            handleErrors,
+            handleNotFound,
+        } = require('../middleware/error');
+
         UtilRoute(app);
         AuthRoute(app);
         HomeRoute(app);
         CourseRoute(app);
+        UserRoute(app);
+
+        app.use(handleErrors);
+        app.use(handleNotFound);
     },
 };
