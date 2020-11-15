@@ -34,10 +34,48 @@ const HomeRoute = (app) => {
         homeHandler.GetLatestCourse,
     );
 };
+
+const CourseRoute = (app) => {
+    const courseHandler = require('../handler/course');
+    const { CheckToken } = require('../middleware/auth');
+
+    app.get(
+        '/course/:id',
+        CheckToken,
+        courseHandler.GetCourseDetailByID,
+    );
+
+    app.get('/course/join/:id', CheckToken, courseHandler.JoinCourse);
+
+    app.get(
+        '/course/topic/:courseID/:topicID',
+        CheckToken,
+        courseHandler.GetTopicByID,
+    );
+
+    app.get(
+        '/course/next/:courseID/:topicID',
+        CheckToken,
+        courseHandler.NextTopic,
+    );
+
+    app.get(
+        '/course/exam/:courseID',
+        CheckToken,
+        courseHandler.TakeExam,
+    );
+
+    app.post(
+        '/course/exam/:courseID',
+        CheckToken,
+        courseHandler.PostExam,
+    );
+};
 module.exports = {
     InitRoute: (app) => {
         UtilRoute(app);
         AuthRoute(app);
         HomeRoute(app);
+        CourseRoute(app);
     },
 };
