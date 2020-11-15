@@ -1,5 +1,3 @@
-const route = require('./route');
-
 const InitAndStart = () => {
     require('dotenv').config();
     const express = require('express');
