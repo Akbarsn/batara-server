@@ -14,7 +14,7 @@ const CourseSchema = new mongoose.Schema(
                 videoURI: String,
             },
         ],
-        userJoined: Number,
+        userJoined: { type: Number, default: 0 },
     },
     { timestamps: {} },
 );
