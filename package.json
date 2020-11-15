@@ -1,7 +1,7 @@
 {
-  "name": "language-of-nusantara-server",
+  "name": "nalang-server",
   "version": "1.0.0",
-  "description": "Server for Language of Nusantara",
+  "description": "Server for Nalang",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
